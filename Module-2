@@ -95,4 +95,23 @@ def simulate_aggregated_metrics():
         str: JSON-formatted decision output.
     """
     decisions = decide_allocation(aggregated_metrics)
-    return json.dumps(decisions, indent=4
+    return json.dumps(decisions, indent=4)
+
+def main():
+    """
+    Main function to run the Adaptive Allocation Engine.
+
+    It simulates receiving aggregated metrics, processes them using rule-based logic,
+    and prints the decision output in JSON format.
+    """
+    aggregated_metrics = simulate_aggregated_metrics()
+    
+    print("Aggregated Metrics (Simulated):")
+    print(json.dumps(aggregated_metrics, indent=4))
+    
+    decision_json = get_decision_json(aggregated_metrics)
+    print("\nResource Allocation Decision (JSON):")
+    print(decision_json)
+
+if _name_ == "_main_":
+    main()
