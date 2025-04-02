@@ -21,3 +21,22 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 # Decision thresholds (non-modifiable)
 CPU_THRESHOLD = 80.0       # If average CPU usage > 80%, then adjust accordingly
 MEMORY_THRESHOLD = 75.0    # If average memory usage > 75%, then flag high usage
+def decide_allocation(aggregated_metrics):
+    """
+    Applies rule-based decision logic to the aggregated system metrics.
+
+    Parameters:
+        aggregated_metrics (dict): Expected structure:
+        {
+            "cpu_percent": {"avg": float, "min": float, "max": float, "std": float},
+            "memory_percent": {"avg": float, "min": float, "max": float, "std": float},
+            "timestamp": str
+        }
+
+    Returns:
+        dict: Decision recommendations with keys:
+            - "timestamp": as provided in the input.
+            - "cpu_adjustment": "reduce_non_critical" if avg CPU > CPU_THRESHOLD, else "normal".
+            - "memory_adjustment": "flag_high_usage" if avg memory > MEMORY_THRESHOLD, else "normal".
+            - "details": Contains "cpu_avg" and "memory_avg".
+    """
