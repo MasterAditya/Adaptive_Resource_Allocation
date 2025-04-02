@@ -40,3 +40,34 @@ def decide_allocation(aggregated_metrics):
             - "memory_adjustment": "flag_high_usage" if avg memory > MEMORY_THRESHOLD, else "normal".
             - "details": Contains "cpu_avg" and "memory_avg".
     """
+ try:
+        cpu_stats = aggregated_metrics["cpu_percent"]
+        memory_stats = aggregated_metrics["memory_percent"]
+        timestamp = aggregated_metrics["timestamp"]
+    except KeyError as e:
+        logging.error("Missing required metric: %s", str(e))
+        raise ValueError("Aggregated metrics missing required key: " + str(e))
+    
+    decisions = {
+        "timestamp": timestamp,
+        "cpu_adjustment": "normal",
+        "memory_adjustment": "normal",
+        "details": {
+            "cpu_avg": cpu_stats.get("avg", 0),
+            "memory_avg": memory_stats.get("avg", 0)
+        }
+    }
+    
+    # Apply CPU decision rule
+    if cpu_stats.get("avg", 0) > CPU_THRESHOLD:
+        decisions["cpu_adjustment"] = "reduce_non_critical"
+    
+    # Apply Memory decision rule
+    if memory_stats.get("avg", 0) > MEMORY_THRESHOLD:
+        decisions["memory_adjustment"] = "flag_high_usage"
+    
+    # Log the decision output as a valid JSON string
+    decision_json = json.dumps(decisions, indent=4)
+    logging.info("Decision Output: %s", decision_json)
+    
+    return decisions
