@@ -79,6 +79,19 @@ def get_decision_json(aggregated_metrics):
         aggregated_metrics (dict): Aggregated system metrics.
 
     Returns:
+def simulate_aggregated_metrics():
+    """
+    Simulates aggregated system metrics for demonstration purposes.
+
+    Returns:
+        dict: Simulated aggregated metrics with fixed values.
+    """
+    simulated_data = {
+        "cpu_percent": {"avg": 85.0, "min": 80.0, "max": 90.0, "std": 3.0},
+        "memory_percent": {"avg": 70.0, "min": 65.0, "max": 75.0, "std": 2.5},
+        "timestamp": "2025-02-14T17:06:48Z"
+    }
+    return simulated_data
         str: JSON-formatted decision output.
     """
     decisions = decide_allocation(aggregated_metrics)
