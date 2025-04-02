@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+"""
+Module: adaptive_allocation_engine.py
+Purpose: Adaptive Allocation Engine (Decision-Making) for the Adaptive Resource Allocation System.
+
+This module receives aggregated system metrics (simulated in this example), applies rule-based decision logic 
+based on predefined thresholds, and outputs resource allocation recommendations in JSON format.
+
+Simulated Aggregated Metrics:
+- CPU average: 85.0 (which triggers a "reduce_non_critical" decision because it exceeds the threshold of 80.0)
+- Memory average: 70.0 (within acceptable range, so "normal" decision)
+- Timestamp: "2025-02-14T17:06:48Z"
+"""
