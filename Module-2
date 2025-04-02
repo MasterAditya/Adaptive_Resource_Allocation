@@ -11,3 +11,13 @@ Simulated Aggregated Metrics:
 - Memory average: 70.0 (within acceptable range, so "normal" decision)
 - Timestamp: "2025-02-14T17:06:48Z"
 """
+import json
+import time
+import logging
+
+# Configure logging with a timestamped format
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+# Decision thresholds (non-modifiable)
+CPU_THRESHOLD = 80.0       # If average CPU usage > 80%, then adjust accordingly
+MEMORY_THRESHOLD = 75.0    # If average memory usage > 75%, then flag high usage
