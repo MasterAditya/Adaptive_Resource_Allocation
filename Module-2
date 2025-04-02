@@ -71,3 +71,15 @@ def decide_allocation(aggregated_metrics):
     logging.info("Decision Output: %s", decision_json)
     
     return decisions
+def get_decision_json(aggregated_metrics):
+    """
+    Returns the decision output as a JSON-formatted string.
+
+    Parameters:
+        aggregated_metrics (dict): Aggregated system metrics.
+
+    Returns:
+        str: JSON-formatted decision output.
+    """
+    decisions = decide_allocation(aggregated_metrics)
+    return json.dumps(decisions, indent=4
